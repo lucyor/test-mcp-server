@@ -8,28 +8,13 @@ import {
 } from "@modelcontextprotocol/sdk/types.js";
 
 const server = new Server({
-  name: "mcp-server",
+  name: "test-mcp-service",
   version: "1.0.0",
 }, {
   capabilities: {
     tools: {}
   }
 });
-
-server.setRequestHandler(ListToolsRequestSchema, async () => {
-  return { tools: [] };
-});
-
-server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  if (request.params.name === "name_of_tool") {
-    return {};
-  }
-  throw new McpError(ErrorCode.ConnectionClosed, "Tool not found");
-});
-
-const transport = new StdioServerTransport();
-await server.connect(transport);
-
 
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
@@ -53,7 +38,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { a, b } = request.params.arguments as any;
     return { toolResult: a + b };
   }
-  throw new McpError(ErrorCode.ConnectionClosed, "Tool not found");
+  throw new Error("Tool not found");
 });
+
+const transport = new StdioServerTransport();
+await server.connect(transport);
+
+
+
 
 
