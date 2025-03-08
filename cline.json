@@ -1,0 +1,11 @@
+{
+  "name": "test-mcp-service",
+  "version": "1.0.0",
+  "entry": "dist/src/index.js",
+  "description": "My MCP service",
+  "author": "llll",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/src/index.js"
+  }
+}
