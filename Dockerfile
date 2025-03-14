@@ -19,4 +19,4 @@ COPY --from=builder /app/node_modules /app/node_modules
 RUN npm run build
 
 # Command will be provided by smithery.yaml
-CMD ["node", "dist/src/index.js"]
+CMD ["node", "dist/index.js"]
